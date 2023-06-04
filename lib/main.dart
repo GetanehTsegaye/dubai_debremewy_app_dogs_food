@@ -1,3 +1,4 @@
+import 'package:dubai_debremewy_app_dogs_food/src/features/authentication/screens/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,16 +12,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
-      title: 'Flutter Demo',
+
 
       home: SafeArea(
-        child: Column(
-          children: [
-            Text(
-              'Hi Getiye'
-            )
-          ],
-        ),
+        child: SplashScreen(),
       ),
     );
   }
