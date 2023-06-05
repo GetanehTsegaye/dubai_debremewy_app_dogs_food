@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> navigateToLoginScreen() async {
-    await Future.delayed(Duration(seconds: 10));
+    await Future.delayed(Duration(seconds: 5));
     Navigator.pushReplacement(
       context as BuildContext,
       MaterialPageRoute(builder: (context) => LoginScreen()),

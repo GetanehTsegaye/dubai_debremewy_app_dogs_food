@@ -42,17 +42,44 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 40.0),
+                    TextField(
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.phone,
+                          color: Colors.grey,
+                        ),
+                        prefixText: '+971',
+
+                        hintText: '     Phone Number',
+                        border: OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
+                        fillColor: Colors.grey.shade50,
+                        filled: true,
+                        //enabled: false,
+                      ),
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(9),
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
+                      keyboardType: TextInputType.number,
+                    ),
+                    SizedBox(height: 10.0),
                     Row(
                       children: [
                         Expanded(
-                          flex: 1,
+                          flex: 3,
                           child: TextField(
                             decoration: InputDecoration(
+                              hintText: '+971',
                               prefixIcon: Icon(
                                 Icons.phone,
                                 color: Colors.grey,
                               ),
-                              hintText: '+971',
                               border: OutlineInputBorder(),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
@@ -63,12 +90,18 @@ class LoginScreen extends StatelessWidget {
                               fillColor: Colors.grey.shade50,
                               filled: true,
                               enabled: false,
+                             // contentPadding: EdgeInsets.only(right: 10.0),
                             ),
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(9),
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                            keyboardType: TextInputType.number,
                           ),
                         ),
-                        SizedBox(width: 10.0),
+                        SizedBox(width: 5.0),
                         Expanded(
-                          flex: 2,
+                          flex: 8,
                           child: TextField(
                             decoration: InputDecoration(
                               hintText: 'Phone Number',
@@ -97,25 +130,21 @@ class LoginScreen extends StatelessWidget {
                       gtText: 'SIGN IN',
                     ),
                     SizedBox(height: 20.0),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Divider(
-                            thickness: 0.5,
-                            color: Colors.grey.shade800,
-
-                          ),
+                    Row(children: [
+                      Expanded(
+                        child: Divider(
+                          thickness: 0.5,
+                          color: Colors.grey.shade800,
                         ),
-                        Text('  OR  '),
-                        Expanded(
-                          child: Divider(
-                            thickness: 0.5,
-                            color: Colors.grey[400],
-
-                          ),
+                      ),
+                      Text('  OR  '),
+                      Expanded(
+                        child: Divider(
+                          thickness: 0.5,
+                          color: Colors.grey[400],
                         ),
-                      ]
-                    ),
+                      ),
+                    ]),
                     SizedBox(height: 20.0),
                     gtButton(
                       onTap: signUserIn,
