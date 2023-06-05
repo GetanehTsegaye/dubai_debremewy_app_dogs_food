@@ -1,14 +1,20 @@
+import 'package:dubai_debremewy_app_dogs_food/src/features/authentication/screens/login_screen/otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../common_widgets/button_widgets.dart';
 import '../../../../constants/color_strings.dart';
 import '../../../../constants/image_strings.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
-  void signUserIn() {}
+  void signUserIn() {
+    Get.to(()=>  OTPScreen(),
+    transition: Transition.rightToLeftWithFade,
+    duration: Duration(seconds: 2));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,61 +75,61 @@ class LoginScreen extends StatelessWidget {
                       keyboardType: TextInputType.number,
                     ),
                     SizedBox(height: 10.0),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: '+971',
-                              prefixIcon: Icon(
-                                Icons.phone,
-                                color: Colors.grey,
-                              ),
-                              border: OutlineInputBorder(),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey),
-                              ),
-                              fillColor: Colors.grey.shade50,
-                              filled: true,
-                              enabled: false,
-                             // contentPadding: EdgeInsets.only(right: 10.0),
-                            ),
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(9),
-                              FilteringTextInputFormatter.digitsOnly,
-                            ],
-                            keyboardType: TextInputType.number,
-                          ),
-                        ),
-                        SizedBox(width: 5.0),
-                        Expanded(
-                          flex: 8,
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: 'Phone Number',
-                              border: OutlineInputBorder(),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey),
-                              ),
-                              fillColor: Colors.grey.shade50,
-                              filled: true,
-                            ),
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(9),
-                              FilteringTextInputFormatter.digitsOnly,
-                            ],
-                            keyboardType: TextInputType.number,
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     Expanded(
+                    //       flex: 3,
+                    //       child: TextField(
+                    //         decoration: InputDecoration(
+                    //           hintText: '+971',
+                    //           prefixIcon: Icon(
+                    //             Icons.phone,
+                    //             color: Colors.grey,
+                    //           ),
+                    //           border: OutlineInputBorder(),
+                    //           enabledBorder: OutlineInputBorder(
+                    //             borderSide: BorderSide(color: Colors.white),
+                    //           ),
+                    //           focusedBorder: OutlineInputBorder(
+                    //             borderSide: BorderSide(color: Colors.grey),
+                    //           ),
+                    //           fillColor: Colors.grey.shade50,
+                    //           filled: true,
+                    //           enabled: false,
+                    //          // contentPadding: EdgeInsets.only(right: 10.0),
+                    //         ),
+                    //         inputFormatters: [
+                    //           LengthLimitingTextInputFormatter(9),
+                    //           FilteringTextInputFormatter.digitsOnly,
+                    //         ],
+                    //         keyboardType: TextInputType.number,
+                    //       ),
+                    //     ),
+                    //     SizedBox(width: 5.0),
+                    //     Expanded(
+                    //       flex: 8,
+                    //       child: TextField(
+                    //         decoration: InputDecoration(
+                    //           hintText: 'Phone Number',
+                    //           border: OutlineInputBorder(),
+                    //           enabledBorder: OutlineInputBorder(
+                    //             borderSide: BorderSide(color: Colors.white),
+                    //           ),
+                    //           focusedBorder: OutlineInputBorder(
+                    //             borderSide: BorderSide(color: Colors.grey),
+                    //           ),
+                    //           fillColor: Colors.grey.shade50,
+                    //           filled: true,
+                    //         ),
+                    //         inputFormatters: [
+                    //           LengthLimitingTextInputFormatter(9),
+                    //           FilteringTextInputFormatter.digitsOnly,
+                    //         ],
+                    //         keyboardType: TextInputType.number,
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                     SizedBox(height: 20.0),
                     gtButton(
                       onTap: signUserIn,
