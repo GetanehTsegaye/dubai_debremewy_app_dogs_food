@@ -6,6 +6,18 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(child:
     Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.grey,
+      ) ,
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(child: Center(
+
+            ))
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
           child: Column(

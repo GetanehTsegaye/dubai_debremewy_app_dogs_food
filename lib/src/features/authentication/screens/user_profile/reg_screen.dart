@@ -1,4 +1,8 @@
+import 'package:dubai_debremewy_app_dogs_food/src/features/authentication/screens/user_profile/profile_picture_upload_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/routes/transitions_type.dart';
 
 import '../../../../common_widgets/button_widgets.dart';
 import '../../../../common_widgets/textfield_widgets.dart';
@@ -15,12 +19,11 @@ class RegistrationScreen extends StatelessWidget {
         child: Container(
           child: Column(
             children: [
-              Image.asset(gtRegistrationImage),
+              //Image.asset(gtRegistrationImage),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Column(
                   children: [
-
                     SizedBox(height: 20.0),
                     Text(
                       'Build Your Profile to get started!',
@@ -80,7 +83,11 @@ class RegistrationScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 10.0),
                     gtButton(
-                      onTap: (){},
+                      onTap: (){
+                        Get.to(()=>  UserProfileScreen(),
+                            transition: Transition.rightToLeftWithFade,
+                            duration: Duration(seconds: 2));
+                      },
                       gtText: 'NEXT',
                     ),
                     SizedBox(height: 20.0),
