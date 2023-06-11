@@ -50,7 +50,7 @@ class OTPScreen extends StatelessWidget {
               SizedBox(height: 20.0),
               gtButton(
                 onTap: (){
-                  Get.to(()=>  OnBoardingScreen(),
+                  Get.to(()=>  RegistrationScreen(),
                       transition: Transition.rightToLeftWithFade,
                       duration: Duration(seconds: 2));
                 },
