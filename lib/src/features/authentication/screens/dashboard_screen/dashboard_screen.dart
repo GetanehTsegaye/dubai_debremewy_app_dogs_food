@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:dubai_debremewy_app_dogs_food/src/features/authentication/screens/daily_words_slider_screens/daily_word_slider_screen.dart';
 import 'package:dubai_debremewy_app_dogs_food/src/features/authentication/screens/user_profile/reg_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,7 +13,6 @@ import '../../../../constants/color_strings.dart';
 import '../../../../constants/image_strings.dart';
 import '../login_screen/otp_screen.dart';
 import '../user_profile/profile_picture_upload_widget.dart';
-import 'book_of_the_day.dart';
 
 import 'home_screen.dart';
 
@@ -27,7 +27,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int _currentIndex = 1;
 
   final List<Widget> _screens = [
-    BookOfTheDayScreen(),
+    DailyWordSliderScreen(),
     HomeScreen(),
     UserProfileScreen(),
   ];
@@ -42,6 +42,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         appBar: AppBar(
           foregroundColor: Colors.black,
           backgroundColor: Colors.white,
+          title: Text('ዓርብ፣ ሰኔ 2 ፣ 2015 ዓ.ም'),
         ),
         drawer: Drawer(
           child: ListView(
