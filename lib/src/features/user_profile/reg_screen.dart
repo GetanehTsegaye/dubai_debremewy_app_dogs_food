@@ -1,15 +1,15 @@
-import 'package:dubai_debremewy_app_dogs_food/src/features/authentication/screens/user_profile/profile_picture_upload_widget.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../common_widgets/button_widgets.dart';
-import '../../../../common_widgets/textfield_widgets.dart';
-import '../../../../constants/image_strings.dart';
+
 import 'dart:io';
 
+import '../../common_widgets/button_widgets.dart';
+import '../../common_widgets/textfield_widgets.dart';
 import '../dashboard_screen/dashboard_screen.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -24,7 +24,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   late File _image; // Variable to store the selected image
 
   final List<String> items = ['Abu Dhabi', 'Dubai', 'Sharjah', 'Umm Al-Quwain', 'Fujairah'];
-  String selectedItem = 'Abu Dhabi';
+  String selectedItem = 'Dubai';
 
   Future getImage(ImageSource source) async {
     try {

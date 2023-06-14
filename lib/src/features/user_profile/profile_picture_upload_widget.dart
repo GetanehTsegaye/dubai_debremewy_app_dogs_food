@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../common_widgets/button_widgets.dart';
-import '../../../../common_widgets/textfield_widgets.dart';
+import '../../common_widgets/button_widgets.dart';
+import '../../common_widgets/textfield_widgets.dart';
+
+
 
 class UserProfileScreen extends StatefulWidget {
   @override

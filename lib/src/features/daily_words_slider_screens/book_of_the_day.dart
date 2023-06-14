@@ -1,7 +1,8 @@
 import 'package:dubai_debremewy_app_dogs_food/src/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../constants/color_strings.dart';
+
+import '../../constants/color_strings.dart';
 import 'slider_widget.dart';
 
 class BookOfTheDayScreen extends StatelessWidget {

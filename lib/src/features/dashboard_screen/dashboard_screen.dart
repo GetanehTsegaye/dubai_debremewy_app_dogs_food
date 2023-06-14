@@ -1,17 +1,16 @@
 import 'dart:io';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:dubai_debremewy_app_dogs_food/src/features/authentication/screens/daily_words_slider_screens/daily_word_slider_screen.dart';
-import 'package:dubai_debremewy_app_dogs_food/src/features/authentication/screens/user_profile/reg_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../common_widgets/button_widgets.dart';
-import 'package:sliding_switch/sliding_switch.dart';
 
-import '../../../../constants/color_strings.dart';
-import '../../../../constants/image_strings.dart';
-import '../login_screen/otp_screen.dart';
+
+
+import '../../constants/color_strings.dart';
+import '../../constants/image_strings.dart';
+import '../daily_words_slider_screens/daily_word_slider_screen.dart';
 import '../user_profile/profile_picture_upload_widget.dart';
 
 import 'home_screen.dart';
@@ -24,12 +23,17 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  int _currentIndex = 1;
+  int _currentIndex = 2;
+
+  int _selectedPage = 2;
+  GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+
 
   final List<Widget> _screens = [
+    UserProfileScreen(),
     DailyWordSliderScreen(),
     HomeScreen(),
-    UserProfileScreen(),
   ];
 
   @override
@@ -38,12 +42,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
     bool _mode = false;
     return SafeArea(
       child: Scaffold(
+        key: _scaffoldKey,
         backgroundColor: gtBackgroundColor,
-        appBar: AppBar(
-          foregroundColor: Colors.black,
-          backgroundColor: Colors.white,
-          title: Text('ዓርብ፣ ሰኔ 2 ፣ 2015 ዓ.ም'),
-        ),
+        // appBar: AppBar(
+        //   foregroundColor: Colors.black,
+        //   backgroundColor: Colors.white,
+        //   title: Text('ዓርብ፣ ሰኔ 2 ፣ 2015 ዓ.ም'),
+        // ),
         drawer: Drawer(
           child: ListView(
             children: [
@@ -54,7 +59,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   Image.asset(gtChurchLogo),
                   SizedBox(height: 10.0),
                   Text(
-                    'የዱባይ ደብረመዊዕ ቅዱስ ሚካኤል ወቅድስት አርሴማ \n ኢ/ኦ/ተ/ቤ/ክርስትያን ', textAlign: TextAlign.center,
+                    'የዱባይ ደብረመዊዕ ቅዱስ ሚካኤል ወቅድስት አርሴማ ኢ/ኦ/ተ/ቤ/ክርስትያን ', textAlign: TextAlign.center,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Divider(
@@ -158,41 +163,52 @@ class _DashboardScreenState extends State<DashboardScreen> {
         bottomNavigationBar: CurvedNavigationBar(
           backgroundColor: gtBackgroundColor,
           color: Colors.white,
-          index: _currentIndex,
+          //index: _currentIndex,
+          index: _selectedPage,
+          key: _bottomNavigationKey,
           height: 50,
           items: <Widget>[
+            Icon(Icons.credit_card, size: 30),
             Icon(Icons.calendar_today, size: 30),
             Icon(Icons.home, size: 30),
-            Icon(Icons.credit_card, size: 30),
+            //Icon(Icons.menu, size: 30),
+            Icon(Icons.settings, size: 30,)
           ],
           onTap: (int index) {
             setState(() {
               _currentIndex = index;
-              if (index == 2) {
+              if (index == 0) {
                 showModalBottomSheet<void>(
                   context: context,
                   builder: (BuildContext context) {
-                    return Expanded(
-                      child: SizedBox(
-                        height: 300,
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              Image.asset(gtSampleMembershipID),
-                            ],
-                          ),
+                    return SizedBox(
+                      height: 300,
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Image.asset(gtSampleMembershipID),
+                          ],
                         ),
                       ),
                     );
                   },
                 );
               }
+              else if (index == 3) {
+                _openDrawer();
+              } else {
+                _selectedPage = index;
+              }
             });
           },
         ),
       ),
     );
+  }
+  void _openDrawer() {
+    _bottomNavigationKey.currentState?.setPage(_selectedPage);
+    _scaffoldKey.currentState?.openDrawer();
   }
 }

@@ -1,13 +1,14 @@
-import 'package:dubai_debremewy_app_dogs_food/src/features/authentication/screens/daily_words_slider_screens/verse_of_the_day.dart';
-import 'package:dubai_debremewy_app_dogs_food/src/features/authentication/screens/dashboard_screen/dashboard_screen.dart';
-import 'package:dubai_debremewy_app_dogs_food/src/features/authentication/screens/dashboard_screen/home_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../../../constants/color_strings.dart';
+
+import '../../constants/color_strings.dart';
+import '../dashboard_screen/dashboard_screen.dart';
 import 'book_of_the_day.dart';
+import 'verse_of_the_day.dart';
 
 class DailyWordSliderScreen extends StatefulWidget {
   DailyWordSliderScreen({Key? key}) : super(key: key);

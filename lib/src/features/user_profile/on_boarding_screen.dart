@@ -1,18 +1,18 @@
 import 'package:dubai_debremewy_app_dogs_food/src/constants/color_strings.dart';
-import 'package:dubai_debremewy_app_dogs_food/src/features/authentication/screens/dashboard_screen/dashboard_screen.dart';
-import 'package:dubai_debremewy_app_dogs_food/src/features/authentication/screens/user_profile/profile_picture_upload_widget.dart';
+
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../../../common_widgets/textfield_widgets_for_white_background.dart';
-import '../../../../constants/image_strings.dart';
+
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../common_widgets/button_widgets.dart';
-import '../../../../common_widgets/textfield_widgets.dart';
+import '../../common_widgets/textfield_widgets.dart';
+import '../dashboard_screen/dashboard_screen.dart';
+
+
 
 class OnBoardingScreen extends StatefulWidget {
   OnBoardingScreen({Key? key}) : super(key: key);

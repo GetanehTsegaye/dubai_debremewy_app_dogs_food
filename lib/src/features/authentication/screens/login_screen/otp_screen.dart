@@ -1,11 +1,12 @@
 import 'package:dubai_debremewy_app_dogs_food/src/common_widgets/button_widgets.dart';
-import 'package:dubai_debremewy_app_dogs_food/src/features/authentication/screens/user_profile/on_boarding_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 
-import '../dashboard_screen/dashboard_screen.dart';
-import '../user_profile/reg_screen.dart';
+import '../../../user_profile/reg_screen.dart';
+
+
 
 
 class OTPScreen extends StatelessWidget {
