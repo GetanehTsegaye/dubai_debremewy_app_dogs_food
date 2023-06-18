@@ -10,10 +10,13 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../constants/color_strings.dart';
 import '../../constants/image_strings.dart';
-import '../daily_words_slider_screens/daily_word_slider_screen.dart';
-import '../user_profile/profile_picture_upload_widget.dart';
 
-import 'home_screen.dart';
+
+
+import 'daily_words_slider_screens/daily_word_slider_screen.dart';
+import 'home_screen/home_screen.dart';
+import 'user_profile/profile_picture_upload_widget.dart';
+import 'user_profile/user_profile_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);

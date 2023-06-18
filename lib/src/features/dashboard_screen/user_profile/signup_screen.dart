@@ -8,18 +8,20 @@ import 'package:image_picker/image_picker.dart';
 
 import 'dart:io';
 
-import '../../common_widgets/button_widgets.dart';
-import '../../common_widgets/textfield_widgets.dart';
-import '../dashboard_screen/dashboard_screen.dart';
+import '../../../common_widgets/button_widgets.dart';
+import '../../../common_widgets/textfield_widgets.dart';
+import '../dashboard_screen.dart';
 
-class RegistrationScreen extends StatefulWidget {
-  RegistrationScreen({Key? key}) : super(key: key);
+
+
+class SignUpScreen extends StatefulWidget {
+  SignUpScreen({Key? key}) : super(key: key);
 
   @override
-  State<RegistrationScreen> createState() => _RegistrationScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _RegistrationScreenState extends State<RegistrationScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
 
   late File _image; // Variable to store the selected image
 
@@ -79,58 +81,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   children: [
                     SizedBox(height: 40.0),
                     Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return SimpleDialog(
-                                title: Text('Choose an option'),
-                                children: [
-                                  SimpleDialogOption(
-                                    child: Text('Take a photo'),
-                                    onPressed: () {
-                                      getImage(ImageSource
-                                          .camera); // Open camera to take a photo
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                  SimpleDialogOption(
-                                    child: Text('Pick from gallery'),
-                                    onPressed: () {
-                                      getImage(ImageSource
-                                          .gallery); // Open gallery to choose a photo
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                        child: Container(
-                          width: 150,
-                          height: 150,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.grey[300],
-                            image: _image.path.isNotEmpty
-                                ? DecorationImage(
-                              image: FileImage(
-                                  _image), // Display the selected image
-                              fit: BoxFit.cover,
-                            )
-                                : null,
-                          ),
-                          child: _image.path.isEmpty
-                              ? Icon(
-                            Icons.camera_alt,
-                            size: 60,
-                            color: Colors.grey[600],
-                          )
-                              : null,
-                        ),
-                      ),
+                      child: uploadPhoto(context),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -214,7 +165,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   transition: Transition.rightToLeftWithFade,
                                   duration: Duration(seconds: 2));
                             },
-                            gtText: 'REGISTER',
+                            gtText: 'SIGN UP',
                           ),
                           SizedBox(height: 20.0),
 
@@ -229,6 +180,61 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         ),
       ),
     ));
+  }
+
+  GestureDetector uploadPhoto(BuildContext context) {
+    return GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return SimpleDialog(
+                              title: Text('Choose an option'),
+                              children: [
+                                SimpleDialogOption(
+                                  child: Text('Take a photo'),
+                                  onPressed: () {
+                                    getImage(ImageSource
+                                        .camera); // Open camera to take a photo
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                SimpleDialogOption(
+                                  child: Text('Pick from gallery'),
+                                  onPressed: () {
+                                    getImage(ImageSource
+                                        .gallery); // Open gallery to choose a photo
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      child: Container(
+                        width: 150,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.grey[300],
+                          image: _image.path.isNotEmpty
+                              ? DecorationImage(
+                            image: FileImage(
+                                _image), // Display the selected image
+                            fit: BoxFit.cover,
+                          )
+                              : null,
+                        ),
+                        child: _image.path.isEmpty
+                            ? Icon(
+                          Icons.camera_alt,
+                          size: 60,
+                          color: Colors.grey[600],
+                        )
+                            : null,
+                      ),
+                    );
   }
 }
 

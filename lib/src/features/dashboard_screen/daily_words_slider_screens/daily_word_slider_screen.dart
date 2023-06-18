@@ -5,8 +5,9 @@ import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 
-import '../../constants/color_strings.dart';
-import '../dashboard_screen/dashboard_screen.dart';
+
+import '../../../constants/color_strings.dart';
+import '../dashboard_screen.dart';
 import 'book_of_the_day.dart';
 import 'verse_of_the_day.dart';
 
@@ -52,6 +53,7 @@ class _DailyWordSliderScreenState extends State<DailyWordSliderScreen> {
                 BookOfTheDayScreen(),
               ],
             ),
+            //Bottom Text - Next and Done
             Container(
                 alignment: Alignment(0, 0.90),
                 child: Row(

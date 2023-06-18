@@ -9,8 +9,10 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../common_widgets/textfield_widgets.dart';
-import '../dashboard_screen/dashboard_screen.dart';
+import '../../../common_widgets/textfield_widgets.dart';
+import '../dashboard_screen.dart';
+
+
 
 
 

@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+
+import '../../../constants/image_strings.dart';
+
+
+
 class SliderWidget extends StatelessWidget {
-   SliderWidget({
-    super.key, this.sliderImage, this.sliderHeaderText, this.sliderBodyText, this.sliderVerseText,
+  SliderWidget({
+    super.key,
+    this.sliderImage,
+    this.sliderHeaderText,
+    this.sliderBodyText,
+    this.sliderVerseText,
   });
-final sliderImage;
-final sliderHeaderText;
-final sliderBodyText;
-final sliderVerseText;
+
+  final sliderImage;
+  final sliderHeaderText;
+  final sliderBodyText;
+  final sliderVerseText;
 
   @override
   Widget build(BuildContext context) {
@@ -46,24 +56,29 @@ final sliderVerseText;
         Expanded(
           child: Container(
             padding: EdgeInsets.only(
-                top: 3.0,
-                left: 10.0,
-                right: 10.0,
-                bottom: 15.0
-            ),
+                top: 3.0, left: 10.0, right: 10.0, bottom: 15.0),
             child: Container(
               decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(gtBackgroundPaternImage),
+                  // Replace with your pattern image path
+                  fit: BoxFit.cover,
+                  colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(0.8), // Adjust opacity as needed
+                    BlendMode.dstATop,
+                  ),
+                  repeat: ImageRepeat.repeat, // Set repeat mode for the pattern
+                ),
                 color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(20.0),
-
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20.0),
                 ),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 2,
                     blurRadius: 5,
-                    offset:
-                    Offset(0, 3), // changes the position of the shadow
+                    offset: Offset(0, 3), // changes the position of the shadow
                   ),
                 ],
                 border: Border.all(
@@ -77,18 +92,15 @@ final sliderVerseText;
                   SizedBox(height: 20.0),
                   Text(
                     sliderHeaderText,
-                    style:
-                    TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   SizedBox(height: 20.0),
                   Container(
-                    margin: EdgeInsets.only(
-                        left: 30.0),
-                    child: Text(
-                       sliderBodyText ),
+                    margin: EdgeInsets.only(left: 30.0),
+                    child: Text(sliderBodyText),
                   ),
-                   SizedBox(height: 20.0),
-                   Text(sliderVerseText)
+                  SizedBox(height: 20.0),
+                  Text(sliderVerseText)
                 ],
               ),
             ),

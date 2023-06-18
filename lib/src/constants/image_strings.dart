@@ -3,6 +3,9 @@ const gtSplashDarkGif = "assets/animations/cross_dark.gif";
 const gtLoginImage = "assets/images/login_screen_image.png";
 const gtRegistrationImage = "assets/images/register_screen_image.png";
 const gtSampleMembershipID = "assets/images/sample_id.png";
+const gtBackgroundPaternImage = "assets/images/grey_pattern.JPG";
+const gtHomePageBGImage = "assets/images/home_page/home_page_bg.png";
+
 
 
 
@@ -34,3 +37,7 @@ const gtUnions = "assets/images/home_page/unions.png";
 const gtLive = "assets/images/home_page/live.png";
 const gtCalendar = "assets/images/home_page/calendar.png";
 const gtHomeScreenImage="assets/images/home_page/home_screen_image.png";
+
+//Reg Screen Images
+
+const gtRegScreenImage ="assets/images/reg_screen_image.png";

@@ -1,10 +1,13 @@
 import 'package:dubai_debremewy_app_dogs_food/src/common_widgets/button_widgets.dart';
+import 'package:dubai_debremewy_app_dogs_food/src/features/dashboard_screen/user_profile/signup_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 
-import '../../../user_profile/reg_screen.dart';
+
+
+
 
 
 
@@ -51,7 +54,7 @@ class OTPScreen extends StatelessWidget {
               SizedBox(height: 20.0),
               gtButton(
                 onTap: (){
-                  Get.to(()=>  RegistrationScreen(),
+                  Get.to(()=>  SignUpScreen(),
                       transition: Transition.rightToLeftWithFade,
                       duration: Duration(seconds: 2));
                 },
