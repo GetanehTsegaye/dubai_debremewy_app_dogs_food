@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "304593744121",
+    "project_id": "duba-debremewy-dogs-food-fbdb",
+    "storage_bucket": "duba-debremewy-dogs-food-fbdb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:304593744121:android:c7f1998f47d7846e057228",
+        "android_client_info": {
+          "package_name": "com.example.dubai_debremewy_app_dogs_food"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "304593744121-nr3s7qrdl2ludrtpgcg5sk9fg1ngljdi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVXmB9G6YMdsuMdZ5-TN3UWDAf8lISSPw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "304593744121-nr3s7qrdl2ludrtpgcg5sk9fg1ngljdi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
