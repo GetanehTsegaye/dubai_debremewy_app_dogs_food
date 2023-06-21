@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "304593744121-iir2tcldat78or7ktseit9rb36h7kemm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dubai_debremewy_app_dogs_food",
+            "certificate_hash": "7233d23b713e5405677f99fb7edcd34b34bb2b7b"
+          }
+        },
+        {
           "client_id": "304593744121-nr3s7qrdl2ludrtpgcg5sk9fg1ngljdi.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "304593744121-nr3s7qrdl2ludrtpgcg5sk9fg1ngljdi.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "304593744121-uc054l2mv636jecpomri6ni8rolhh1jt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.dubaiDebremewyAppDogsFood"
+              }
             }
           ]
         }

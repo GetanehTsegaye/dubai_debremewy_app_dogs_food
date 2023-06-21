@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:dubai_debremewy_app_dogs_food/src/features/authentication/screens/login_screen/authentication_repository.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -119,7 +120,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ListTile(
                 leading: Icon(Icons.logout_outlined, color: Colors.black),
                 title: Text('Sign Out'),
-                onTap: () {},
+                onTap: () {
+                  AuthenticationRepository.instance.logout();
+                },
               ),
               Divider(
                 thickness: 1,

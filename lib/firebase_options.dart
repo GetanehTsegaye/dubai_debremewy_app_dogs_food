@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '304593744121',
     projectId: 'duba-debremewy-dogs-food-fbdb',
     storageBucket: 'duba-debremewy-dogs-food-fbdb.appspot.com',
+    androidClientId: '304593744121-iir2tcldat78or7ktseit9rb36h7kemm.apps.googleusercontent.com',
     iosClientId: '304593744121-uc054l2mv636jecpomri6ni8rolhh1jt.apps.googleusercontent.com',
     iosBundleId: 'com.example.dubaiDebremewyAppDogsFood',
   );
