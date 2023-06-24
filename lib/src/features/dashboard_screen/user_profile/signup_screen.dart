@@ -1,4 +1,4 @@
-//import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -78,16 +78,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future signUp() async{
 
-    // // The following will create a userProfiles collection in the database if it is not already created in the firebase
-    // await FirebaseFirestore.instance.collection('userProfiles').add({
-    //   'Full Name':_fullNameController.text.trim(),
-    //   'Gender':_genderController.text,
-    //   'Email':_emailController.text.trim(),
-    //   'Phone Number':user?.phoneNumber!.toString(),
-    //   'Maritial Status':_maritalStatusController,
-    //   'Church Location':_churchLocationController
-    //
-    // });
+    // The following will create a userProfiles collection in the database if it is not already created in the firebase
+    try{
+      await FirebaseFirestore.instance.collection('userProfiles').add({
+        'Full Name':_fullNameController.text.trim(),
+        //'Gender':_genderController.text,
+        'Email':_emailController.text.trim(),
+        'Phone Number':user?.phoneNumber!.toString(),
+        //'Maritial Status':_maritalStatusController,
+        //'Church Location':_churchLocationController
+
+      });
+
+    }
+    catch(e){
+      print(e.toString());
+    }
+
 
     Get.to(() => DashboardScreen(),
         transition: Transition.rightToLeftWithFade,
