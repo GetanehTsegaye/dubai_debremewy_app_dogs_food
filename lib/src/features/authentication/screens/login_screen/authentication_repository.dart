@@ -87,4 +87,72 @@ return credentials.user !=null ? true : false;
   }
 
   Future<void> logout() async => await _auth.signOut();
+
+
+  Future<void> signUserIn(String phoneNo) async {
+   // String phoneNumber = '+971${phoneNo.text.trim()}'; // Format the phone number
+
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(
+        PhoneAuthProvider.credential(
+          verificationId: this.verificationId.value, // Replace with the verification ID received during OTP verification
+          smsCode: '', // Replace with the OTP entered by the user
+        ),
+      );
+
+      // User is signed in successfully, proceed with your logic
+      // ...
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        if (e.code == 'invalid-verification-code') {
+          // Handle invalid OTP error
+          print('Invalid OTP');
+        } else if (e.code == 'credential-already-in-use') {
+          // Handle phone number already registered error
+          print('Phone number already registered');
+          // Show an error message to the user and redirect to the sign-in page
+          showDialog(
+            context: Get.context!,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Phone Number Already Registered'),
+                content: Text('Please sign in with your phone number instead.'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      // Redirect to the sign-in page
+                      // Example: Navigator.pushReplacementNamed(context, '/signin');
+                    },
+                    child: Text('OK'),
+                  ),
+                ],
+              );
+            },
+          );
+        } else if (e.code == 'user-not-found') {
+          // Handle phone number not registered error
+          print('Phone number not registered');
+          // Show an error message to the user and redirect to the sign-up page
+          showDialog(
+            context: Get.context!,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Phone Number Not Registered'),
+                content: Text('Please sign up with your phone number.'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      // Redirect to the sign-up page
+                      // Example: Navigator.pushReplacementNamed(context, '/signup');
+                    },
+                    child: Text('OK'),
+                  ),
+                ],
+              );
+            },
+          );
+        }
+      }
+    }
+  }
 }

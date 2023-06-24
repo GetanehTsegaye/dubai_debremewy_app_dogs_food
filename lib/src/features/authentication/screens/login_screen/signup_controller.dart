@@ -1,18 +1,6 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 import 'package:dubai_debremewy_app_dogs_food/src/features/authentication/screens/login_screen/authentication_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,8 +19,16 @@ class SignUpController extends GetxController {
     // ...
 
     // Call the Authentication Repository to create the user with the phone number
+
     AuthenticationRepository.instance.phoneAuthentication('+971$phoneNumber');
+
+
   }
+void signUserIn(){
+  final phoneNumber = phoneNo.text;
+  AuthenticationRepository.instance.signUserIn('+971$phoneNumber');
+}
+
 }
 
 

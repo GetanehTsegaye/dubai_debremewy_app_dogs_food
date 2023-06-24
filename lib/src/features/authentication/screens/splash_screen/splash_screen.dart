@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> navigateToLoginScreen() async {
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(Duration(seconds: 10));
     Get.to(()=>  LoginScreen(),
         transition: Transition.fadeIn,
         duration: Duration(seconds: 3));
