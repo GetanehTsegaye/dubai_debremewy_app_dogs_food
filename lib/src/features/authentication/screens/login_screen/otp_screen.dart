@@ -1,8 +1,6 @@
 import 'package:dubai_debremewy_app_dogs_food/src/common_widgets/button_widgets.dart';
-import 'package:dubai_debremewy_app_dogs_food/src/features/authentication/screens/login_screen/authentication_repository.dart';
 import 'package:dubai_debremewy_app_dogs_food/src/features/authentication/screens/login_screen/otp_controller.dart';
-import 'package:dubai_debremewy_app_dogs_food/src/features/dashboard_screen/user_profile/signup_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
@@ -11,15 +9,19 @@ import 'package:get/get.dart';
 import '../../../../constants/image_strings.dart';
 
 
+class OTPScreen extends StatefulWidget {
+   OTPScreen({Key? key, }) : super(key: key);
 
 
 
+  @override
+  State<OTPScreen> createState() => _OTPScreenState();
+}
+
+class _OTPScreenState extends State<OTPScreen> {
 
 
-
-class OTPScreen extends StatelessWidget {
-   OTPScreen({Key? key}) : super(key: key);
-
+   String errorMessage = '';
   @override
   Widget build(BuildContext context) {
     var otp;
@@ -81,8 +83,7 @@ class OTPScreen extends StatelessWidget {
               ),
               SizedBox(height: 40.0),
               Text(
-                '',
-                //'Enter the verification code that was sent to:  ${user?.phoneNumber!}' ,
+                'Enter the verification code.' ,
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 18.0),
               ),
@@ -96,21 +97,41 @@ class OTPScreen extends StatelessWidget {
                   otp =code;
                   //if the otp code is correct automatically redirect it to the Dashboard
                   //OTPController.instance.verifyOTP(otp);
-                  otpController.verifyOTP(otp);
+                  try {
+                    otpController.verifyOTP(otp);
+                  }
+                  catch (e){
+                    setState(() {
+                      errorMessage = 'Wrong code. Please Try again!';
+                    });
+                  }
                 }
               ),
               SizedBox(height: 20.0),
               gtButton(
                 onTap: (){
                   //Incase you have to type the OTP manually and need to hit Next button, this will redirect it to the next screen
-                  otpController.verifyOTP(otp);
+                  try {
+                    otpController.verifyOTP(otp);
+                  }
+                  catch (e){
+                  setState(() {
+                    errorMessage = 'Wrong code. Please Try again!';
+                  });
+                  }
                   //OTPController.instance.verifyOTP(otp);
                   // Get.to(()=>  SignUpScreen(),
                   //     transition: Transition.rightToLeftWithFade,
                   //     duration: Duration(seconds: 2));
                 },
                 gtText: 'NEXT',
-              )
+              ),
+              SizedBox(height: 20.0),
+              errorMessage.isNotEmpty?Text(
+                errorMessage,
+                style: TextStyle(color:  Colors.red, fontSize: 16, ),
+              ): SizedBox(),
+
             ],
           ),
         ),

@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dubai_debremewy_app_dogs_food/src/features/authentication/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
@@ -12,7 +14,14 @@ import '../../../common_widgets/button_widgets.dart';
 import '../../../common_widgets/radio_button_widgets.dart';
 import '../../../common_widgets/textfield_widgets.dart';
 import '../../../constants/image_strings.dart';
+import '../../authentication/screens/login_screen/login_screen.dart';
+import '../../authentication/screens/login_screen/otp_screen.dart';
+import '../../authentication/screens/login_screen/signup_controller.dart';
 import '../dashboard_screen.dart';
+
+// for the image
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:path/path.dart' as path;
 
 class SignUpScreen extends StatefulWidget {
   SignUpScreen({Key? key}) : super(key: key);
@@ -24,12 +33,12 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   late File _image; // Variable to store the selected image
   final user = FirebaseAuth.instance.currentUser;
-
+  String errorMessage = '';
   final _fullNameController = TextEditingController();
-  final _genderController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _phoneNumberController = TextEditingController();
-  final _maritalStatusController = TextEditingController();
+  int _genderController = 0;
+  //final _emailController = TextEditingController();
+  String _phoneNumberController ='';
+  int _maritalStatusController = 0;
   final _churchLocationController = TextEditingController();
 
   final List<String> churchCountyList = [
@@ -74,214 +83,316 @@ class _SignUpScreenState extends State<SignUpScreen> {
       );
     }
   }
-
-
+// Function to upload an image to Firebase Storage
+  Future<String> uploadImageToFirebase(File imageFile) async {
+    String fileName = path.basename(imageFile.path);
+    firebase_storage.Reference storageRef =
+    firebase_storage.FirebaseStorage.instance.ref().child(fileName).child('id');
+    firebase_storage.UploadTask uploadTask = storageRef.putFile(imageFile);
+    firebase_storage.TaskSnapshot taskSnapshot = await uploadTask;
+    String imageUrl = await taskSnapshot.ref.getDownloadURL();
+    return imageUrl;
+  }
+  void RegisterUser() {
+    final user = UserModel(
+        fullName: _fullNameController.text.trim(),
+        gender: _genderController,
+        phoneNo: _phoneNumberController,
+        maritalStatus: _maritalStatusController,
+        churchLocation: selectedCountry);
+    SignUpController.instance.createUser(user);
+    Get.to(() => OTPScreen(),
+        transition: Transition.rightToLeftWithFade,
+        duration: Duration(seconds: 2));
+  }
   Future signUp() async{
+// Upload image to Firebase Storage
 
     // The following will create a userProfiles collection in the database if it is not already created in the firebase
     try{
-      await FirebaseFirestore.instance.collection('userProfiles').add({
-        'Full Name':_fullNameController.text.trim(),
-        //'Gender':_genderController.text,
-        'Email':_emailController.text.trim(),
-        'Phone Number':user?.phoneNumber!.toString(),
-        //'Maritial Status':_maritalStatusController,
-        //'Church Location':_churchLocationController
 
-      });
+
+      SignUpController.instance.phoneAuthentication();
+      Get.to(() => OTPScreen(),
+          transition: Transition.rightToLeftWithFade,
+          duration: Duration(seconds: 2));
+
+
+            await FirebaseFirestore.instance.collection('userProfiles').add({
+              'Full Name': _fullNameController.text.trim(),
+              'Gender':_genderController,
+              // 'Email': _emailController.text.trim(),
+              'Phone Number': _phoneNumberController,
+              'Maritial Status':_maritalStatusController,
+              'Church Location': selectedCountry,
+              // 'Profile Picture URL': profilePicURL, // Save the image URL
+            });
 
     }
     catch(e){
       print(e.toString());
     }
 
-
-    Get.to(() => DashboardScreen(),
-        transition: Transition.rightToLeftWithFade,
-        duration: Duration(seconds: 2));
   }
+
+
   @override
   void initState() {
     super.initState();
     _image = File(''); // Provide an initial empty file to avoid null errors
   }
+  void handleSelectedGender(int index) {
+   setState(() {
+     _genderController = index;
+   });
+
+  }
+  void handleSelectedStatus(int index) {
+
+    setState(() {
+      _maritalStatusController = index;
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(
+        SignUpController());
     return SafeArea(
         child: Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(gtBackgroundPaternImage),
-              // Replace with your pattern image path
-              fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), // Adjust opacity as needed
-                BlendMode.dstATop,
-              ),
-              repeat: ImageRepeat.repeat, // Set repeat mode for the pattern
-            ),
-            color: Colors.white,
-            borderRadius: BorderRadius.all(
-              Radius.circular(20.0),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: Offset(0, 3), // changes the position of the shadow
-              ),
-            ],
-            border: Border.all(
-              color: Colors.grey.withOpacity(0.5),
-              width: 1.0,
-            ),
-          ),
-          child: Column(
-            children: [
-              //Image.asset(gtRegistrationImage),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(height: 40.0),
-                    Center(
-                      child: uploadPhoto(context),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Column(
-                        children: [
-                          SizedBox(height: 20.0),
-                          Text(
-                            'Build Your Profile to get started!',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 20.0),
-                          gtTextField(
-                            gtController: _fullNameController,
-                            gtHintText: 'Full Name',
-                            gtPrefixIcon: Icon(
-                              Icons.person_outline_rounded,
-                              color: Colors.grey,
-                            ),
-                          ),
-                          SizedBox(height: 5.0),
-                          gtCustomRadioButtonWidget(
-                            fieldName: 'Gender',
-                            option1: 'Male',
-                            option2: 'Female',
-                            icon1: Icons.man,
-                            icon2: Icons.woman,
-                          ),
+      body: Container(
+        child: SingleChildScrollView(
+          child: Container(
 
-                          SizedBox(height: 5.0),
-                          gtTextField(
-                            gtController: _emailController,
-                            gtHintText: 'Email',
-                            gtPrefixIcon: Icon(
-                              Icons.email_outlined,
-                              color: Colors.grey,
+            child: Column(
+              children: [
+                //Image.asset(gtRegistrationImage),
+                Image.asset(gtRegScreenImage),
+                Text(
+                  'Welcome!',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  ' Build Your Profile to get started!',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(height: 5.0),
+                      // Center(
+                      //   child: uploadPhoto(context),
+                      // ),
+
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Column(
+                          children: [
+                            //SizedBox(height: 20.0),
+
+
+                            gtTextField(
+                              gtController: _fullNameController,
+                              gtHintText: 'Full Name',
+                              gtPrefixIcon: Icon(
+                                Icons.person_outline_rounded,
+                                color: Colors.grey,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 10.0),
-                          TextField(
-                            enabled: false,
-                            decoration: InputDecoration(
+                            //SizedBox(height: 5.0),
+                            gtCustomRadioButtonWidget(
+                              fieldName: 'Gender',
+                              option1: 'Male',
+                              option2: 'Female',
+                              icon1: Icons.man,
+                              icon2: Icons.woman,
+                              onChanged: handleSelectedGender,
+                            ),
+
+                            SizedBox(height: 5.0),
+                            // gtTextField(
+                            //   gtController: _emailController,
+                            //   gtHintText: 'Email',
+                            //   gtPrefixIcon: Icon(
+                            //     Icons.email_outlined,
+                            //     color: Colors.grey,
+                            //   ),
+                            // ),
+                            SizedBox(height: 5.0),
+                            TextField(
+                              controller: controller.phoneNo,
+                              decoration: InputDecoration(
                                 prefixIcon: Icon(
-                                  Icons.phone_outlined,
+                                  Icons.phone,
                                   color: Colors.grey,
                                 ),
-                                hintText: user?.phoneNumber!.toString(),
+                                prefixText: '+971',
+
+                                hintText: '     Phone Number',
                                 border: OutlineInputBorder(),
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
+                                  borderSide: BorderSide(color: Colors.grey.shade300),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.grey),
                                 ),
                                 fillColor: Colors.white,
-                                filled: true),
-                          ),
-                          SizedBox(height: 5.0),
-                          gtCustomRadioButtonWidget(
-                            fieldName: 'Maritial Status',
-                            option1: 'Single',
-                            option2: 'Married',
-                            icon1: Icons.person,
-                            icon2: Icons.people,
-                          ),
-                          SizedBox(height: 10.0),
-                          Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text('Select your Church\'s Location', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),)),
-                          SizedBox(height: 5.0),
-                          Container(
-                            padding:
-                            EdgeInsets.only(left: 20.0, right: 20.0, top: 5, bottom: 5.0),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(6.0),
-                              border: Border.all(color: Colors.grey.shade300 ),
+                                filled: true,
+                                //enabled: false,
+                              ),
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(9),
+                                FilteringTextInputFormatter.digitsOnly,
+                              ],
+                              keyboardType: TextInputType.number,
                             ),
-                            child: Row(
+                            //SizedBox(height: 5.0),
+                            gtCustomRadioButtonWidget(
+                              fieldName: 'Maritial Status',
+                              option1: 'Single',
+                              option2: 'Married',
+                              icon1: Icons.person,
+                              icon2: Icons.people,
+                                onChanged: handleSelectedStatus,
+                            ),
+                            SizedBox(height: 10.0),
+                            Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text('Select your Church\'s Location', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),)),
+                            SizedBox(height: 5.0),
+                            Container(
+                              padding:
+                              EdgeInsets.only(left: 20.0, right: 20.0, top: 5, bottom: 5.0),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(6.0),
+                                border: Border.all(color: Colors.grey.shade300 ),
+                              ),
+                              child: Row(
 
-                              children: [
-                                Expanded(
-                                  flex:1,
-                                  child: Icon(
-                                    Icons.church_outlined,
-                                    color: Colors.grey,
+                                children: [
+                                  Expanded(
+                                    flex:1,
+                                    child: Icon(
+                                      Icons.church_outlined,
+                                      color: Colors.grey,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(width: 15.0),
-                                Expanded(
-                                  flex: 9,
-                                  child: DropdownButton<String>(
-                                    value: selectedCountry,
-                                    onChanged: (String? newValue) {
-                                      if (newValue != null) {
-                                        setState(() {
-                                          selectedCountry = newValue; // Update the selected country
-                                        });
-                                      }
-                                    },
-                                    items: churchCountyList.map<DropdownMenuItem<String>>(
-                                            (String value) {
-                                          return DropdownMenuItem<String>(
-                                            value: value,
-                                            child: Text(value),
-                                          );
-                                        }).toList(),
-                                    underline: Container(height: 0, color: Colors.white),
+                                  SizedBox(width: 15.0),
+                                  Expanded(
+                                    flex: 9,
+                                    child: DropdownButton<String>(
 
+                                      value: selectedCountry,
+                                      onChanged: (String? newValue) {
+                                        if (newValue != null) {
+                                          setState(() {
+                                            selectedCountry = newValue; // Update the selected country
+                                          });
+                                        }
+                                      },
+                                      items: churchCountyList.map<DropdownMenuItem<String>>(
+                                              (String value) {
+                                            return DropdownMenuItem<String>(
+                                              value: value,
+                                              child: Text(value),
+                                            );
+                                          }).toList(),
+                                      underline: Container(height: 0, color: Colors.white),
+
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ),
+
+                            SizedBox(height: 20.0),
+
+                            errorMessage.isNotEmpty?Text(
+                              errorMessage,
+                              style: TextStyle(color:  Colors.red, fontSize: 16, ),
+                            ): SizedBox(),
+                            gtButton(
+                              onTap: (){
+
+                                errorMessage ='';
+                                if(_fullNameController.text.trim().isEmpty ) {
+                                  setState(() {
+                                    errorMessage = '- Full Name is required \n';
+                                  });
+                                }
+                                if(_genderController==0) {
+                                  setState(() {
+                                    errorMessage = errorMessage + '- Gender is required \n';
+                                  });
+                                }
+                                if(_maritalStatusController== 0 ) {
+                                  setState(() {
+                                    errorMessage = errorMessage +'- Marital Status is required \n';
+                                  });
+                                }
+                                 if (controller.phoneNo.text.trim().length != 9) {
+                                  setState(() {
+                                    errorMessage =
+                                        errorMessage + '- Please enter a valid Phone Number!';
+                                  });
+                                } else
+                                  {
+                                    _phoneNumberController ='+971'+controller.phoneNo.text.trim();
+                                  }
+                                 if(errorMessage.isEmpty ) {
+                                   //signUp();
+                                   RegisterUser();
+                                 }
+                              },
+                              gtText: 'REGISTER',
+                            ),
+                            SizedBox(height: 20.0),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  'I am already a member!',
+                                  style: TextStyle(
+                                      fontSize: 16.0, fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(width: 10.0),
+                                GestureDetector(
+                                  onTap: (){
+                                    Get.to(() => LoginScreen(),
+                                        transition: Transition.fadeIn,
+                                        duration: Duration(seconds: 1));
+                                  },
+                                  child: Text(
+                                    'LogIn now',
+                                    style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue[800]),
                                   ),
                                 ),
                               ],
-                            )
-                          ),
+                            ),
 
-                          SizedBox(height: 30.0),
-                          gtButton(
-                            onTap: signUp,
-                            gtText: 'SIGN UP',
-                          ),
-                          SizedBox(height: 20.0),
-                        ],
-                      ),
-                    )
-                  ],
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -318,8 +429,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         );
       },
       child: Container(
-        width: 150,
-        height: 150,
+        width: 100,
+        height: 100,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.grey[300],
@@ -340,4 +451,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
+
+
 }

@@ -6,19 +6,22 @@ import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
+    WidgetsFlutterBinding.ensureInitialized();
 
-  //Initialize the Firebase then call the OnReady function from the AuthenticationRepository
-  Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform).then((value) => Get.put(AuthenticationRepository()));
-  runApp(const MyChurchApp());
-}
+//Initialize the Firebase then call the OnReady function from the AuthenticationRepository
+    Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform).then((value) => Get.put(AuthenticationRepository()));
+    runApp(const MyChurchApp());
+  }
+
 
 class MyChurchApp extends StatelessWidget {
   const MyChurchApp({super.key});
 
   // This widget is the root of your application.
   @override
+
+
   Widget build(BuildContext context) {
     return GetMaterialApp(
       home: SafeArea(

@@ -174,7 +174,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           key: _bottomNavigationKey,
           height: 50,
           items: <Widget>[
-            Icon(Icons.credit_card, size: 30),
+            Icon(Icons.person_outline_sharp, size: 30),
             Icon(Icons.calendar_today, size: 30),
             Icon(Icons.home, size: 30),
             //Icon(Icons.menu, size: 30),

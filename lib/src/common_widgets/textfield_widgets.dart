@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 class gtTextField extends StatelessWidget {
   const gtTextField({
-    super.key, this.gtHintText, this.gtPrefixIcon, this.gtController,
+    super.key, this.gtHintText, this.gtPrefixIcon, this.gtController, this.gtInitialValue,
   });
   final gtPrefixIcon;
   final gtHintText;
   final gtController;
+  final gtInitialValue;
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: gtController,
+      initialValue: gtInitialValue,
       decoration: InputDecoration(
           prefixIcon:gtPrefixIcon ,
           hintText: gtHintText,

@@ -7,6 +7,7 @@ class gtCustomRadioButtonWidget extends StatefulWidget {
   final String option2;
   final IconData icon1;
   final IconData icon2;
+  final Function(int) onChanged;
 
   const gtCustomRadioButtonWidget({
     Key? key,
@@ -15,6 +16,7 @@ class gtCustomRadioButtonWidget extends StatefulWidget {
     required this.option2,
     required this.icon1,
     required this.icon2,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -30,6 +32,7 @@ class _gtCustomRadioButtonWidgetState extends State<gtCustomRadioButtonWidget> {
       onTap: () {
         setState(() {
           value = index;
+          widget.onChanged(value);
         });
       },
       child: Container(

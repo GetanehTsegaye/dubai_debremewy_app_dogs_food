@@ -28,22 +28,37 @@ class AuthenticationRepository extends GetxController {
   @override
   void onReady() {
     // Starts running everytime the application is opened
-    firebaseUser = Rx<User?>(_auth
-        .currentUser); //Initialized the firebase user. So firebaseUser is the current user who is logged in or logged out
-    firebaseUser.bindStream(_auth
-        .userChanges()); //userChanges is a Stream type which means its always listening to the users action. Is the user hitting the login/logout button
+    //Initialized the firebase user. So firebaseUser is the current user who is logged in or logged out
+    firebaseUser = Rx<User?>(_auth.currentUser);
+    //userChanges is a Stream type which means its always listening to the users action. Is the user hitting the login/logout button
+    firebaseUser.bindStream(_auth.userChanges());
     // the ever method is always ready to perform some action
     ever(firebaseUser,
         _setInitialScreen); // so firebaseUser is listening and when something new is happening the _setInitialScreen method should be executed
   }
 
-  _setInitialScreen(User? user) {
-    if (user == null) // if the user is null, that means the user is logged out
-    {
-      Get.offAll(() => const LoginScreen());
-    } else // This means that the user has been authenticated and logged in so redirect them to the dashboard
-    {
-      Get.offAll(() => const DashboardScreen());
+  // _setInitialScreen(User? user) {
+  //   if (user == null) // if the user is null, that means the user is logged out
+  //   {
+  //     Get.offAll(() => const LoginScreen());
+  //   } else // This means that the user has been authenticated and logged in so redirect them to the dashboard
+  //   {
+  //     Get.offAll(() => const DashboardScreen());
+  //   }
+  // }
+
+  _setInitialScreen(User? user) async {
+    if (user == null) {
+      await Future.delayed(Duration(seconds: 4));
+       Get.to(()=>  LoginScreen(),
+           transition: Transition.fadeIn,
+           duration: Duration(seconds: 3));
+    } else {
+      await Future.delayed(Duration(seconds: 4));
+          Get.to(()=>  DashboardScreen(),
+          transition: Transition.fadeIn,
+          duration: Duration(seconds: 3));
+
     }
   }
 
