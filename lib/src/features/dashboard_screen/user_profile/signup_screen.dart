@@ -36,7 +36,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String errorMessage = '';
   final _fullNameController = TextEditingController();
   int _genderController = 0;
-  //final _emailController = TextEditingController();
+  final _emailController = TextEditingController();
   String _phoneNumberController ='';
   int _maritalStatusController = 0;
   final _churchLocationController = TextEditingController();
@@ -52,7 +52,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   ];
   String selectedCountry = 'Dubai';
   int selectedGender = 0;
-
+// Get Image from your camera or gallery
   Future getImage(ImageSource source) async {
     try {
       var image = await ImagePicker().pickImage(source: source);
@@ -125,7 +125,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               'Phone Number': _phoneNumberController,
               'Maritial Status':_maritalStatusController,
               'Church Location': selectedCountry,
-              // 'Profile Picture URL': profilePicURL, // Save the image URL
+              //'Profile Picture URL': profilePicURL, // Save the image URL
             });
 
     }
@@ -167,7 +167,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
             child: Column(
               children: [
-                //Image.asset(gtRegistrationImage),
+               // Image.asset(gtRegistrationImage),
                 Image.asset(gtRegScreenImage),
                 Text(
                   'Welcome!',
@@ -191,9 +191,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       SizedBox(height: 5.0),
-                      // Center(
-                      //   child: uploadPhoto(context),
-                      // ),
+                      Center(
+                        child: uploadPhoto(context),
+                      ),
 
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -217,18 +217,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               option2: 'Female',
                               icon1: Icons.man,
                               icon2: Icons.woman,
+                              initialValue: 0,
                               onChanged: handleSelectedGender,
                             ),
 
                             SizedBox(height: 5.0),
-                            // gtTextField(
-                            //   gtController: _emailController,
-                            //   gtHintText: 'Email',
-                            //   gtPrefixIcon: Icon(
-                            //     Icons.email_outlined,
-                            //     color: Colors.grey,
-                            //   ),
-                            // ),
+                            gtTextField(
+                              gtController: _emailController,
+                              gtHintText: 'Email',
+                              gtPrefixIcon: Icon(
+                                Icons.email_outlined,
+                                color: Colors.grey,
+                              ),
+                            ),
                             SizedBox(height: 5.0),
                             TextField(
                               controller: controller.phoneNo,
@@ -264,6 +265,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               option2: 'Married',
                               icon1: Icons.person,
                               icon2: Icons.people,
+                              initialValue: 0,
                                 onChanged: handleSelectedStatus,
                             ),
                             SizedBox(height: 10.0),
@@ -340,6 +342,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 if(_maritalStatusController== 0 ) {
                                   setState(() {
                                     errorMessage = errorMessage +'- Marital Status is required \n';
+                                  });
+                                }
+                                if(_emailController.text.trim().isEmpty ) {
+                                  setState(() {
+                                    errorMessage = '- Email is required \n';
                                   });
                                 }
                                  if (controller.phoneNo.text.trim().length != 9) {

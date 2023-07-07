@@ -3,8 +3,10 @@ import 'package:dubai_debremewy_app_dogs_food/src/features/authentication/screen
 import 'package:dubai_debremewy_app_dogs_food/src/repository/user_repository.dart';
 import 'package:get/get.dart';
 
+import '../models/user_model.dart';
+
 class ProfileController extends GetxController{
-  static ProfileController get instace => Get.find();
+  static ProfileController get instance => Get.find();
 
   final _authRepo = Get.put(AuthenticationRepository());
   final _userRepo = Get.put(UserRepository());
@@ -17,5 +19,11 @@ class ProfileController extends GetxController{
   } else {
     Get.snackbar('Error', "Login to continue");
   }
+  }
+
+
+  ///Fet
+  updateRecord(UserModel user) async{
+    await _userRepo.updateUserRecord(user);
   }
 }

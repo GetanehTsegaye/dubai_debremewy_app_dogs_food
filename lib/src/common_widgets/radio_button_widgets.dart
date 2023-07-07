@@ -8,6 +8,7 @@ class gtCustomRadioButtonWidget extends StatefulWidget {
   final IconData icon1;
   final IconData icon2;
   final Function(int) onChanged;
+  final int initialValue;
 
   const gtCustomRadioButtonWidget({
     Key? key,
@@ -17,6 +18,8 @@ class gtCustomRadioButtonWidget extends StatefulWidget {
     required this.icon1,
     required this.icon2,
     required this.onChanged,
+    required this.initialValue,
+
   }) : super(key: key);
 
   @override
@@ -27,11 +30,18 @@ class gtCustomRadioButtonWidget extends StatefulWidget {
 class _gtCustomRadioButtonWidgetState extends State<gtCustomRadioButtonWidget> {
   int value = 0;
 
-  Widget radioButton(String text, int index, IconData iconData) {
+  @override
+  void initState() {
+    super.initState();
+    value = widget.initialValue; // Set initial value from parameter
+  }
+
+  Widget radioButton(String text, int index, IconData iconData, ) {
     return GestureDetector(
       onTap: () {
         setState(() {
-          value = index;
+        //  widget.initialValue =;
+          value =  0;
           widget.onChanged(value);
         });
       },

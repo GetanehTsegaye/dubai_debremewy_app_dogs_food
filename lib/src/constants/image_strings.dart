@@ -41,3 +41,7 @@ const gtHomeScreenImage="assets/images/home_page/home_screen_image.png";
 //Reg Screen Images
 
 const gtRegScreenImage ="assets/images/reg_screen_image.png";
+
+
+const gtPhoto = "assets/images/photo_Placeholder.png";
+const gtIdBackground = "assets/images/IDBackground.JPG";
