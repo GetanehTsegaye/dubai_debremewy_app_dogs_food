@@ -37,6 +37,8 @@ const gtUnions = "assets/images/home_page/unions.png";
 const gtLive = "assets/images/home_page/live.png";
 const gtCalendar = "assets/images/home_page/calendar.png";
 const gtHomeScreenImage="assets/images/home_page/home_screen_image.png";
+const gtServices = "assets/images/home_page/services.png";
+const gtDonations = "assets/images/home_page/donations.png";
 
 //Reg Screen Images
 
@@ -45,3 +47,9 @@ const gtRegScreenImage ="assets/images/reg_screen_image.png";
 
 const gtPhoto = "assets/images/photo_Placeholder.png";
 const gtIdBackground = "assets/images/IDBackground.JPG";
+
+
+//Church
+
+const gtDubaiChurch = "assets/images/Churchs/DubaiChurch.png";
+const gtLocationPin = "assets/images/Churchs/location-pin-in.jpg";

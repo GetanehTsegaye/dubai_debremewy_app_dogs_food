@@ -18,7 +18,6 @@ import 'home_screen/home_screen.dart';
 import 'user_profile/profile_picture_upload_widget.dart';
 import 'user_profile/user_profile_screen.dart';
 
-
 //import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -29,8 +28,6 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-
-
   int _currentIndex = 2;
 
   int _selectedPage = 2;
@@ -52,11 +49,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
       child: Scaffold(
         key: _scaffoldKey,
         backgroundColor: gtBackgroundColor,
-        // appBar: AppBar(
-        //   foregroundColor: Colors.black,
-        //   backgroundColor: Colors.white,
-        //   title: Text('ዓርብ፣ ሰኔ 2 ፣ 2015 ዓ.ም'),
-        // ),
         drawer: Drawer(
           child: ListView(
             children: [
@@ -79,13 +71,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
               ListTile(
                 leading:
-                Icon(Icons.home_repair_service_sharp, color: Colors.black),
+                    Icon(Icons.home_repair_service_sharp, color: Colors.black),
                 title: Text('Services'),
                 onTap: () {},
               ),
               ListTile(
                 leading:
-                Icon(Icons.calendar_month_outlined, color: Colors.black),
+                    Icon(Icons.calendar_month_outlined, color: Colors.black),
                 title: Text('Calendar'),
                 onTap: () {},
               ),
@@ -140,7 +132,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   Text(
                     'Follow Us On',
                     style:
-                    TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 20.0),
                   Row(
@@ -207,24 +199,63 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   ConnectionState.done) {
                                 //Data has been completly fetched
                                 if (snapshot.hasData) {
-                                  UserModel userData = snapshot.data as UserModel;
+                                  UserModel userData =
+                                      snapshot.data as UserModel;
 
                                   //Controllers
-                                  final christianNameController =userData.christianName.toString();
-                                  final mahiberNameController = userData.mahiberName.toString();
-                                  final occupationTypeController = userData.occupationType.toString();
-                                  final profilePic = userData.profilePicutreUrl.toString();
+                                  final profilePic;
+                                  final christianNameController;
+                                  final occupationTypeController;
+                                  final mahiberNameController;
+
+
+
+                                  if (userData.profilePicutreUrl.toString() == "") {
+                                    profilePic =
+                                    "gs://duba-debremewy-dogs-food-fbdb.appspot.com/photo_Placeholder.png";
+                                  } else {
+                                    profilePic =
+                                        userData.profilePicutreUrl.toString();
+                                  }
+
+
+                                  if (userData.christianName.toString() == "") {
+                                    christianNameController =
+                                    "ክርስትና ስም";
+                                  } else {
+                                    christianNameController =
+                                        userData.christianName.toString();
+                                  }
+
+                                    if (userData.occupationType.toString() ==
+                                        "") {
+                                      occupationTypeController =
+                                      "የሥራ ዘርፍ";
+                                    } else {
+                                      occupationTypeController =
+                                          userData.occupationType.toString();
+                                    }
+
+                                  if (userData.mahiberName.toString() ==
+                                      "" || userData.mahiberName == null) {
+                                    mahiberNameController =
+                                    "የፅዋ ማህበር ስም";
+                                  } else {
+                                    mahiberNameController =
+                                        userData.mahiberName.toString();
+                                  }
+
+
                                   return Form(
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Container(
                                           decoration: BoxDecoration(
                                             image: DecorationImage(
-                                              image: AssetImage(
-                                                  gtIdBackground),
+                                              image: AssetImage(gtIdBackground),
                                               // Replace with your pattern image path
                                               fit: BoxFit.cover,
                                               // colorFilter: ColorFilter.mode(
@@ -241,8 +272,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                             ),
                                             boxShadow: [
                                               BoxShadow(
-                                                color: Colors.grey.withOpacity(
-                                                    0.5),
+                                                color: Colors.grey
+                                                    .withOpacity(0.5),
                                                 spreadRadius: 2,
                                                 blurRadius: 5,
                                                 offset: Offset(0,
@@ -250,8 +281,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                               ),
                                             ],
                                             border: Border.all(
-                                              color: Colors.black.withOpacity(
-                                                  1),
+                                              color:
+                                                  Colors.black.withOpacity(1),
                                               width: 1.0,
                                             ),
                                           ),
@@ -266,20 +297,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                       flex: 6,
                                                       child: Text(
                                                         'የዱባይ ደብረመዊዕ ቅዱስ ሚካኤል ወቅድስት አርሴማ ኢ/ኦ/ተ/ቤ/ክርስትያን ',
-                                                        textAlign: TextAlign
-                                                            .center,
+                                                        textAlign:
+                                                            TextAlign.center,
                                                         style: TextStyle(
-                                                            fontWeight: FontWeight
-                                                                .bold),
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
                                                       ),
                                                     ),
                                                     Expanded(
                                                       flex: 2,
-                                                      child:  CircleAvatar(
+                                                      child: CircleAvatar(
                                                         radius: 35,
                                                         backgroundImage:
-                                                        AssetImage(
-                                                            gtChurchLogo),
+                                                            AssetImage(
+                                                                gtChurchLogo),
                                                       ),
                                                     ),
                                                   ],
@@ -292,78 +324,92 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                       flex: 3,
                                                       child: Container(
                                                         decoration: BoxDecoration(
-                                                          border: Border.all(
-                                                            color: Colors.white,
-                                                            width: 5.0,
-                                                          ),
+                                                          image: DecorationImage(
+                                                            image: AssetImage('assets/images/photo_Placeholder.png'),)
                                                         ),
-                                                        height: 150,
-                                                        //color: Colors.grey[300],
-                                                        child: Image.network(
-                                                          profilePic,
-                                                          fit: BoxFit.cover,
+                                                        child: Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border.all(
+                                                              color: Colors.white,
+                                                              width: 5.0,
+                                                            ),
+                                                          ),
+                                                          height: 150,
+                                                          //color: Colors.grey[300],
+                                                          child: Image.network(
+                                                            profilePic,
+                                                            fit: BoxFit.cover,
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
                                                     Expanded(
                                                       flex: 5,
                                                       child: Container(
-                                                        decoration: BoxDecoration(
-                                                          image: DecorationImage(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          image:
+                                                              DecorationImage(
                                                             image: AssetImage(
                                                                 gtBackgroundPaternImage),
                                                             // Replace with your pattern image path
                                                             fit: BoxFit.cover,
-                                                            colorFilter: ColorFilter
-                                                                .mode(
+                                                            colorFilter:
+                                                                ColorFilter
+                                                                    .mode(
                                                               Colors.black
                                                                   .withOpacity(
-                                                                  0.8),
+                                                                      0.8),
                                                               // Adjust opacity as needed
                                                               BlendMode.dstATop,
                                                             ),
-
                                                           ),
-
-
                                                         ),
                                                         height: 150,
-                                                        padding: EdgeInsets
-                                                            .only(left: 16.0),
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 16.0),
                                                         child: Column(
-                                                          mainAxisAlignment: MainAxisAlignment
-                                                              .center,
-                                                          crossAxisAlignment: CrossAxisAlignment
-                                                              .start,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
                                                           children: [
                                                             Text(
                                                               christianNameController,
+
                                                               style: TextStyle(
-                                                                color: Colors.black,
+                                                                color: Colors
+                                                                    .black,
                                                                 fontSize: 20.0,
-                                                                fontWeight: FontWeight.bold,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
                                                               ),
                                                             ),
-
                                                             SizedBox(
                                                                 height: 8.0),
                                                             Text(
                                                               occupationTypeController,
-                                                              style: TextStyle(
-                                                                color: Colors.black,
 
+                                                              style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
                                                               ),
                                                             ),
                                                             SizedBox(
                                                                 height: 8.0),
-
                                                             SizedBox(
                                                                 height: 8.0),
                                                             Text(
                                                               mahiberNameController,
-                                                              style: TextStyle(
-                                                                color: Colors.black,
 
+                                                              style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
                                                               ),
                                                             ),
                                                           ],
@@ -373,7 +419,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                   ],
                                                 ),
                                               ),
-
                                             ],
                                           ),
                                         ),
@@ -384,14 +429,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       // ],
                                     ),
                                   );
-                              } else {
-                              return Center(child: Text(snapshot.error.toString()));
-                              }
+                                } else {
+                                  return Center(
+                                      child: Text(snapshot.error.toString()));
+                                }
                               } else if (snapshot.hasError) {
-                              //Data is still being fetched
-                              return const Center(child: CircularProgressIndicator());
+                                //Data is still being fetched
+                                return const Center(
+                                    child: CircularProgressIndicator());
                               } else {
-                              return const Center(child: Text('Loading....'));
+                                return const Center(child: Text('Loading....'));
                               }
                             },
                           ),

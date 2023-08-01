@@ -47,6 +47,9 @@ dependencies:
   firebase_auth: ^4.6.3
   cloud_firestore: ^4.0.1
   firebase_storage: ^11.2.3
+  google_maps_flutter: ^2.3.1
+  google_maps_webservice: ^0.0.20-nullsafety.5
+  url_launcher: ^6.0.0
 
 
 
@@ -82,6 +85,15 @@ flutter:
       - assets/images/
       - assets/logos/
       - assets/images/home_page/
+      - assets/images/puzzle/
+      - assets/images/Churchs/
+      - assets/images/priests/
+      - assets/images/Live/
+      - assets/images/services/
+      - assets/images/donation/
+      - assets/images/union/
+      - assets/images/books/
+      - assets/images/news/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

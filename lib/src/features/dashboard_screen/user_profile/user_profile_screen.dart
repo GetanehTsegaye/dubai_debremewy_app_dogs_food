@@ -287,8 +287,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                                     option2: 'Female',
                                                     icon1: Icons.man,
                                                     icon2: Icons.woman,
-                                                    initialValue:
-                                                        userData.gender,
+                                                    //initialValue:userData.gender,
                                                     onChanged:
                                                         handleSelectedGender,
                                                   ),
@@ -350,8 +349,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                                     option2: 'Married',
                                                     icon1: Icons.person,
                                                     icon2: Icons.people,
-                                                    initialValue:
-                                                        userData.maritalStatus,
+                                                    //initialValue: userData.maritalStatus,
                                                     onChanged:
                                                         handleSelectedStatus,
                                                   ),

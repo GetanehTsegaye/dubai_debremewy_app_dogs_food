@@ -152,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 } else {
                                   setState(() {
                                     errorMessage =
-                                        'No account with this Phone Number, please Register!';
+                                        'No account with this Phone Number,\n please Register!';
                                   });
                                 }
                                 //SignUpController.instance.phoneAuthentication('+971586905908');

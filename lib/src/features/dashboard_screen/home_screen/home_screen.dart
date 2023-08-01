@@ -1,8 +1,19 @@
+import 'package:dubai_debremewy_app_dogs_food/src/features/dashboard_screen/Book_screens/books_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constants/color_strings.dart';
 import '../../../constants/image_strings.dart';
+import '../../Games/puzzle_home_page.dart';
+
+
+import '../LiveStream/live_stream.dart';
+import '../News/news_screen.dart';
+import '../church_screen/church_details.dart';
+import '../church_screen/church_screen.dart';
+import '../donation_screen/donations.dart';
+import '../services/services_screen.dart';
+import '../union_screens/union_search_screen.dart';
 import 'home_icon_buttons.dart';
 import '../news_screen.dart';
 import '../youtube_slider_widget.dart';
@@ -181,19 +192,29 @@ class _HomeScreenState extends State<HomeScreen> {
                                     iconImage: gtAnnouncement,
                                     gtIconText: 'News',
                                     gtIconTapped: () {
-                                     Get.to(() => ClickableImage(),);
+                                     Get.to(() => NewsScreen(),);
                                     },
                                   ),
-                                  HomeIconButtons(
-                                    iconImage: gtChurch,
-                                    gtIconText: 'Church',
-                                    gtIconTapped: () {},
-                                  ),
-                                  HomeIconButtons(
-                                    iconImage: gtBooks,
-                                    gtIconText: 'Books',
-                                    gtIconTapped: () {},
-                                  ),
+                                      HomeIconButtons(
+                                        iconImage: gtLive,
+                                        gtIconText: 'Live',
+                                        gtIconTapped: () {
+                                          Get.to(
+                                                () => LiveStreamScreen(),
+                                          );
+
+                                        },
+                                      ),
+                                      HomeIconButtons(
+                                        iconImage: gtGames,
+                                        gtIconText: 'Games',
+                                        gtIconTapped: () {
+                                          Get.to(
+                                            () => PuzzleHomePage(),
+                                          );
+                                        },
+                                      ),
+
                                   // HomeIconButtons(
                                   //   iconImage: gtConnect,
                                   //   gtIconText: 'Connect',
@@ -212,9 +233,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   //   gtIconTapped: () {},
                                   // ),
                                   HomeIconButtons(
-                                    iconImage: gtPrayers,
-                                    gtIconText: 'Prayers',
-                                    gtIconTapped: () {},
+                                    iconImage: gtChurch,
+                                    gtIconText: 'Church',
+                                    gtIconTapped: () {
+                                      Get.to(
+                                                () => ChurchDetailsScreen(),
+                                            );
+                                    },
                                   ),
                                   HomeIconButtons(
                                     iconImage: gtSermons,
@@ -222,42 +247,72 @@ class _HomeScreenState extends State<HomeScreen> {
                                     gtIconTapped: () {},
                                   ),
                                   HomeIconButtons(
-                                    iconImage: gtTestimonial,
-                                    gtIconText: 'Testimonials',
-                                    gtIconTapped: () {},
+                                    iconImage: gtBooks,
+                                    gtIconText: 'Books',
+                                    gtIconTapped: () {
+                                      Get.to(
+                                          ()=>BooksScreen(),
+                                      );
+                                    },
                                   ),
+                                  // HomeIconButtons(
+                                  //   iconImage: gtPrayers,
+                                  //   gtIconText: 'Prayers',
+                                  //   gtIconTapped: () {},
+                                  // ),
+                                  //
+                                  // HomeIconButtons(
+                                  //   iconImage: gtTestimonial,
+                                  //   gtIconText: 'Testimonials',
+                                  //   gtIconTapped: () {},
+                                  // ),
                                 ],
                               ),
                               SizedBox(height: 10.0),
-                              // Row(
-                              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              //   children: [
-                              //     HomeIconButtons(
-                              //       iconImage: gtGames,
-                              //       gtIconText: 'Games',
-                              //       gtIconTapped: () {
-                              //         Get.to(
-                              //           () => YoutubePage(),
-                              //         );
-                              //       },
-                              //     ),
-                              //     HomeIconButtons(
-                              //       iconImage: gtUnions,
-                              //       gtIconText: 'Unions',
-                              //       gtIconTapped: () {},
-                              //     ),
-                              //     HomeIconButtons(
-                              //       iconImage: gtLive,
-                              //       gtIconText: 'Live',
-                              //       gtIconTapped: () {},
-                              //     ),
-                              //     HomeIconButtons(
-                              //       iconImage: gtCalendar,
-                              //       gtIconText: 'Calendar',
-                              //       gtIconTapped: () {},
-                              //     ),
-                              //   ],
-                              // )
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  // HomeIconButtons(
+                                  //   iconImage: gtGames,
+                                  //   gtIconText: 'Games',
+                                  //   gtIconTapped: () {
+                                  //     Get.to(
+                                  //       () => YoutubePage(),
+                                  //     );
+                                  //   },
+                                  // ),
+                                  HomeIconButtons(
+                                    iconImage: gtUnions,
+                                    gtIconText: 'Unions',
+                                    gtIconTapped: () {
+
+                                      Get.to(
+                                            () => UnionSearchScreen(),
+                                      );
+                                    },
+                                  ),
+                                  HomeIconButtons(
+                                    iconImage: gtDonations,
+                                    gtIconText: 'Donations',
+                                    gtIconTapped: () {
+                                      Get.to(
+                                            () => DonationScreen(),
+                                      );
+
+                                    },
+                                  ),
+                                  HomeIconButtons(
+                                    iconImage: gtServices,
+                                    gtIconText: 'Services',
+                                    gtIconTapped: () {
+                                      Get.to(
+                                            () => ServicesScreen(),
+                                      );
+
+                                    },
+                                  ),
+                                ],
+                              )
                             ],
                           ),
                         )
